@@ -11,7 +11,7 @@ services:
         value: production
 
   # Frontend: static site (free)
-  - type: web
+  - type: static
     name: frontend-app
     runtime: static
     plan: free
