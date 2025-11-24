@@ -1,21 +1,22 @@
 services:
-  # Backend API Service (Render - dynamic web service)
-  - type: web_service
+  # Backend: dynamic Node web service
+  - type: web
     name: backend-api
-    plan: starter
-    runtime: node
+    runtime: node         # dynamic Node runtime
+    plan: free            # try free; if dashboard errors, change to starter
     buildCommand: cd backend && npm install
     startCommand: cd backend && npm start
     envVars:
       - key: NODE_ENV
         value: production
 
-  # Frontend Static Site (Render - static site, eligible for free plan)
-  - type: static_site
+  # Frontend: static site (runtime: static)
+  - type: web
     name: frontend-app
+    runtime: static
     plan: free
     buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: ./frontend/dist
+    staticPublishPath: ./frontend/dist   # change if your build folder differs
     envVars:
       - key: NODE_ENV
         value: production
