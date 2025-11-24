@@ -10,8 +10,9 @@ services:
         value: production
       - key: PORT
         value: 10000
-  - type: static site
+  - type: web
     name: frontend-app
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
