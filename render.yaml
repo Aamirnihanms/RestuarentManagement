@@ -1,10 +1,9 @@
 services:
   # Backend API Service (Free Web Service)
-  - type: web
+  - type: web_service
     name: backend-api
-    runtime: node
-    plan: free
     env: node
+    plan: free
     buildCommand: cd backend && npm install
     startCommand: cd backend && npm start
     envVars:
@@ -15,8 +14,9 @@ services:
     # Add your environment variables here
     # - key: DATABASE_URL
     #   sync: false
+
   # Frontend Static Site (Free Static Site)
-  - type: static site
+  - type: static_site
     name: frontend-app
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
