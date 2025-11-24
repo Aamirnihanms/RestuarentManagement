@@ -11,7 +11,7 @@ services:
         value: production
 
   # Frontend Static Site (Render - Free tier)
-  - type: static_site
+  - type: web
     name: frontend-app
     plan: free        # ⬅️ static sites get the free plan
     buildCommand: cd frontend && npm install && npm run build
