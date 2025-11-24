@@ -1,5 +1,4 @@
 services:
-  # Backend API Service (Free Web Service)
   - type: web
     name: backend-api
     runtime: node
@@ -11,22 +10,15 @@ services:
         value: production
       - key: PORT
         value: 10000
-    # Add your environment variables here
-    # - key: DATABASE_URL
-    #   sync: false
-
-  # Frontend Static Site (Free Static Site)
-  - type: static
+  - type: static site
     name: frontend-app
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
       - key: NODE_ENV
         value: production
-      # Update this with your backend URL after deployment
       - key: VITE_API_URL
         value: https://your-backend-api.onrender.com
-    # SPA routing support
     routes:
       - type: rewrite
         source: /*
