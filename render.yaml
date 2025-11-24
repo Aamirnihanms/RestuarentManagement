@@ -14,7 +14,7 @@ services:
   - type: web
     name: frontend-app
     runtime: static
-    plan: free
+    plan: starter
     buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
