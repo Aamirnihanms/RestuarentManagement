@@ -1,32 +1,30 @@
 services:
-  # Backend API Service (Free Web Service)
-  - type: web_service
+  # Backend API Service (Render - web service, Node)
+  - type: web
     name: backend-api
     env: node
-    plan: free
     buildCommand: cd backend && npm install
     startCommand: cd backend && npm start
     envVars:
       - key: NODE_ENV
         value: production
+      # It's usually best to let Render provide PORT; your server should use process.env.PORT || 10000
       - key: PORT
-        value: 10000
-    # Add your environment variables here
-    # - key: DATABASE_URL
-    #   sync: false
+        value: "10000"
 
-  # Frontend Static Site (Free Static Site)
-  - type: static_site
+  # Frontend Static Site (Render - static site represented as a web service with env: static)
+  - type: web
     name: frontend-app
+    env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
       - key: NODE_ENV
         value: production
-      # Update this with your backend URL after deployment
+      # Update this after deployment (or set to the backend service URL in your Render dashboard)
       - key: VITE_API_URL
         value: https://your-backend-api.onrender.com
-    # SPA routing support
+    # SPA routing support (rewrites to index.html)
     routes:
       - type: rewrite
         source: /*
