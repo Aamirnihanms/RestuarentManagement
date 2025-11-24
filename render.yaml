@@ -1,6 +1,6 @@
 services:
   # Backend API Service (Render - Node server)
-  - type: web_service
+  - type: web
     name: backend-api
     plan: starter     # ⬅️ backend cannot be free
     runtime: node
