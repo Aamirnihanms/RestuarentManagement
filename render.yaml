@@ -1,8 +1,8 @@
 services:
-  # Backend API Service (Render - Node server)
-  - type: web
+  # Backend API Service (Render - dynamic web service)
+  - type: web_service
     name: backend-api
-    plan: starter     # ⬅️ backend cannot be free
+    plan: starter
     runtime: node
     buildCommand: cd backend && npm install
     startCommand: cd backend && npm start
@@ -10,10 +10,10 @@ services:
       - key: NODE_ENV
         value: production
 
-  # Frontend Static Site (Render - Free tier)
-  - type: web
+  # Frontend Static Site (Render - static site, eligible for free plan)
+  - type: static_site
     name: frontend-app
-    plan: free        # ⬅️ static sites get the free plan
+    plan: free
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
