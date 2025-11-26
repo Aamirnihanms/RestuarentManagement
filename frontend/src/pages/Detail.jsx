@@ -463,12 +463,17 @@ export default function FoodDetailPage() {
                         <div>
                             <div className="flex items-center justify-between mb-6">
                                 <h3 className="text-2xl font-bold text-gray-800">Customer Reviews</h3>
-                                <button
-                                    onClick={() => setIsReviewModalOpen(true)}
-                                    className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full font-semibold hover:shadow-lg transition-all"
-                                >
-                                    Write a Review
-                                </button>
+{localStorage.getItem("token") &&
+ localStorage.getItem("user") &&
+ JSON.parse(localStorage.getItem("user")).role === "user" && (
+    <button
+        onClick={() => setIsReviewModalOpen(true)}
+        className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full font-semibold hover:shadow-lg transition-all"
+    >
+        Write a Review
+    </button>
+)}
+
                             </div>
 
                             <div className="space-y-6">
