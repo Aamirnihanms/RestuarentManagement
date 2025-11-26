@@ -71,3 +71,12 @@ export const updateSettings = async (data) => {
 };
 
 
+export const getAllEmployeesData = async () => {
+  const res = await axios.get("/admin/users/employees");
+  return res.data;
+};
+
+export const registerEmployee = async (data) => {
+  const res = await axios.post("/users/create-employee",data);
+  return res.data;
+};

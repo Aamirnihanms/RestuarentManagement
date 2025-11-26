@@ -9,7 +9,7 @@ import { createLog } from "../utils/logger.js"; // ✅ Import logger utility
 export const getAllUsers = async (req, res) => {
   try {
     // 👇 Fetch only non-admin users & non-deleted users
-    const users = await User.find({ role: { $ne: "admin" } })
+    const users = await User.find({ role: "user" })
       .select("-password")
       .sort({ createdAt: -1 });
 
@@ -142,6 +142,43 @@ export const restoreUser = async (req, res) => {
     await createLog({
       user: req.user?._id,
       action: "User Restore Error",
+      description: error.message,
+      ipAddress: req.ip,
+      method: req.method,
+      endpoint: req.originalUrl,
+      status: "failed",
+    });
+
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+
+// get all employees list
+
+export const getAllEmployees = async (req, res) => {
+  try {
+    // 👇 Fetch only non-admin users & non-deleted users
+    const users = await User.find({ role: "employee" })
+      .select("-password")
+      .sort({ createdAt: -1 });
+
+    await createLog({
+      user: req.user?._id,
+      action: "Get Employee List",
+      description: `Admin viewed all active Employee (${users.length} total)`,
+      ipAddress: req.ip,
+      method: req.method,
+      endpoint: req.originalUrl,
+    });
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+
+    await createLog({
+      user: req.user?._id,
+      action: "Get Employee List Error",
       description: error.message,
       ipAddress: req.ip,
       method: req.method,

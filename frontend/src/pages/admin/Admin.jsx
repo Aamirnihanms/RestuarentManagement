@@ -20,7 +20,8 @@ import {
   User,
   FileText,
   Tag,
-  MessageSquare
+  MessageSquare,
+  UserCog
 } from 'lucide-react';
 import { getDashboardData } from '../../api/dashboardApi';
 import Orders from './Orders';
@@ -29,6 +30,7 @@ import Customers from './Customers';
 import Reviews from './Review';
 import Logs from './Log';
 import SettingsData from './Settings';
+import Employees from './Employees';
 import { useNavigate } from 'react-router-dom';
 
 export default function AdminPanel() {
@@ -70,7 +72,7 @@ export default function AdminPanel() {
     { id: 'foods', icon: UtensilsCrossed, label: 'Food Items' },
     // { id: 'categories', icon: Tag, label: 'Categories' },
     { id: 'customers', icon: Users, label: 'Customers' },
-    // { id: 'analytics', icon: BarChart3, label: 'Analytics' },
+    { id: 'employees', icon: UserCog, label: 'Employees' },
     { id: 'reviews', icon: MessageSquare, label: 'Reviews' },
     { id: 'reports', icon: FileText, label: 'Reports' },
     { id: 'settings', icon: Settings, label: 'Settings' },
@@ -327,6 +329,7 @@ export default function AdminPanel() {
           {activeTab === 'reviews' && <Reviews />}
           {activeTab === 'reports' && <Logs />}
           {activeTab === 'settings' && <SettingsData />}
+          {activeTab === 'employees' && <Employees />}
           {/* {activeTab !== 'dashboard' && (
             <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
               <div className="inline-block p-4 bg-emerald-100 rounded-full mb-4">
