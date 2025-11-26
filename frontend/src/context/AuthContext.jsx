@@ -44,12 +44,15 @@ const login = async (email, password) => {
     
     setUser(data.user);
 
-    if (data.user.role === "admin") {
-      navigate("/admin");
-    } else {
-      navigate("/");
-      toast.success("Login successful!");
-    }
+if (data.user.role === "admin") {
+  navigate("/admin");
+} else if (data.user.role === "employee") {
+  navigate("/employee");
+} else {
+  navigate("/");
+}
+toast.success("Login successful!");
+
 
   } catch (error) {
     throw error.response?.data?.message || "Login failed";
